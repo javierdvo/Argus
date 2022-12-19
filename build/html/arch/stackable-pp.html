@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="Stackable Plug & Play Generative Model Architecture" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="arch/stackable-pp.html" />
+<meta property="og:site_name" content="Argus" />
+<meta property="og:description" content="The principal idea from Musat et al of using a modular weather-stacking for synthetic data generation is quite useful and shows promise. The results from their publication appear to show that the t..." />
+<meta name="description" content="The principal idea from Musat et al of using a modular weather-stacking for synthetic data generation is quite useful and shows promise. The results from their publication appear to show that the t..." />
+
+    <title>Stackable Plug &amp; Play Generative Model Architecture &#8212; Argus</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/rtd-data.js"></script>
+    <script src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Infrastructure Devops, &amp; MLOps" href="infra-devops-mlops.html" />
+    <link rel="prev" title="Datasets" href="datasets.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+     
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../reference/blog/atom.xml"
+  title="Blog"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Argus</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Why Argus
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/problem.html">
+   Adverse-Weather impact on ADAS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/research.html">
+   Previous Research
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/dimensionality.html">
+   Dimensionality explosion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/sim2real.html">
+   Sim-to-Real Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/gans.html">
+   GANs and CycleGANs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/evaluation.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Architecture
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="datasets.html">
+   Datasets
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Stackable Plug &amp; Play Generative Model Architecture
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="infra-devops-mlops.html">
+   Infrastructure Devops, &amp; MLOps
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-flywheel.html">
+   Data Flywheel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="future-work.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Use Cases
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/cases.html">
+   Use Cases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/client-facing.html">
+   Client-Facing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/internal-facing.html">
+   Internal-Facing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SaaS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/income-sources.html">
+   Income Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/costs.html">
+   Costs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/licensing-legal.html">
+   Licensing and Legal
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/javierdvo/Argus"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/issues/new?title=Issue%20on%20page%20%2Farch/stackable-pp.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/edit/master/docs/arch/stackable-pp.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/arch/stackable-pp.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Stackable Plug & Play Generative Model Architecture</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                 <section class="tex2jax_ignore mathjax_ignore" id="stackable-plug-play-generative-model-architecture">
+<h1>Stackable Plug &amp; Play Generative Model Architecture<a class="headerlink" href="#stackable-plug-play-generative-model-architecture" title="Permalink to this headline">#</a></h1>
+<p>The principal idea from <a class="reference external" href="https://openaccess.thecvf.com/content/ICCV2021W/AVVision/papers/Musat_Multi-Weather_City_Adverse_Weather_Stacking_for_Autonomous_Driving_ICCVW_2021_paper.pdf">Musat et al</a> of using a modular weather-stacking for synthetic data generation is quite useful and shows promise. The results from their publication appear to show that the total mix of all adverse weather combination is the best performing, nevertheless there can be potential scenarios when a limited subset is of use, or when only specific conditions are necessary in specific regions. Thus a flexible architecture that can be mix-and-matched can have potential and is worth exploring. Argus aims to use this idea as a central building block of a validation architecture for ML models.</p>
+<p>A rough diagram of the desired flow architecture is as follows:</p>
+<a class="reference internal image-reference" href="../_images/sample_flow_usr.png"><img alt="../_images/sample_flow_usr.png" src="../_images/sample_flow_usr.png" style="width: 1080px;" /></a>
+<p>The flow architecture is composed of the following components:</p>
+<ul class="simple">
+<li><p>User provided datasets (either for augmentation or for validation)</p></li>
+<li><p>A stack of possible GAN-based generative models that can be mixed together (per Musat et al) to generate synthetic data. These models are already evaluated and validated in a catalogue and the client can select the ones that are useful for their use case based on the results (transparency). They are constantly updated and evaluated by the Argus team.</p></li>
+<li><p>The dataset is synthetically augmented with the chosen generative stack (or the default one). Qualitative evaluation is performed so the client can trust the generated images will be real-like</p></li>
+<li><p>The user can download the synth data for train dataset augmentation, or their custom ML model can be evaluated with the given synthetically augmented dataset. The results are provided to the user and visualizations follow to raise critical points &amp; issues and make it very clear where the model is performing correctly and where it isn’t.</p></li>
+<li><p>At the same time, the synthetic images are also evaluated with the internal evaluation models to analyze the performance of the generative models and refine them if necessary.</p></li>
+</ul>
+<p>For the internal team the desired flow architecture is shown below:</p>
+<a class="reference internal image-reference" href="../_images/sample_flow_int.png"><img alt="../_images/sample_flow_int.png" src="../_images/sample_flow_int.png" style="width: 1080px;" /></a>
+<p>The main benefits of this approach are:</p>
+<ul class="simple">
+<li><p>Versatility: Enabling the use of multiple stacked weather conditions increases the potential dimensionality of the synthetic data that can be generated. This then allows the client to generate synthetic data for testing in wider range of use cases, or potentially larger training dataset.</p></li>
+<li><p>Validation Robustness: By using a modular approach, we can ensure that the generative model can generalize well to the different weather conditions that are expected in the real world. This then allows validation of the desired ML model in multiple adverse weather conditions and gauge if it can how well it can possibly generalize in the real world.</p></li>
+<li><p>Cost-efficiency: By learning an efficient mapping of the domain shift the generative approach can generate simulated data from multiple weather conditions in an efficient manner which translates to a lower cost (when compared with phyiscs-based simulation).</p></li>
+<li><p>Edge case generation: Many adverse weather conditions are complex to observer in the real world, and mixes of them can be even less frequent, as such a system that can potentially stack them and extend previously seen normal weather conditions can be useful for edge case generation that can potentially cause critical errors.</p></li>
+<li><p>Explainability: The generative approach can be used to generate synthetic data that can be used to explain the model’s behavior in different weather conditions. This can be useful for debugging and understanding the model’s behavior in different conditions.</p></li>
+</ul>
+<p>On the contrary, the challenges that this approach presents are as follows:</p>
+<ul class="simple">
+<li><p>Dimensional complexity: When the number of adverse weather conditions, the potential combinations increases proportionally. As the dimensional space increases in size, data will thus be more sparse and harder to obtain. This is a challenge when obtaining the dataset to train the generative models on.</p></li>
+<li><p>Dataset: To properly evaluate GAN models, balanced and representative datasets must be obtained that closely match the probability distributions of the real world. This can be costly and time consuming. As better generative models are desired, the requirements on the dataset increase to ensure the models can keep on improving.</p></li>
+<li><p>Training reuse: While generative models that are worthwhile can be used multiple times to generate synthetic data for multiple datasets, the training process is still costly and time consuming. Continuous development of multiple generative models can thus be costly particularly if specific combinations are not used frequently. Thus care needs to be taken to evaluate the tradeoffs between flexibility and usefulness.</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./arch"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="datasets.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Datasets</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="infra-devops-mlops.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Infrastructure Devops, &amp; MLOps</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Javier De Velasco Oriol<br/>
+  
+      &copy; Copyright 2022, Javier De Velasco Oriol.<br/>
+    Last updated on Dec 18, 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

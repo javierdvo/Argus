@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="GANs and CycleGANs" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="theory/gans.html" />
+<meta property="og:site_name" content="Argus" />
+<meta property="og:description" content="Generative Adversarial Networks (GANs) are a type of machine learning model that is made up of two neural networks: a generator network and a discriminator network. The generator network is trained..." />
+<meta name="description" content="Generative Adversarial Networks (GANs) are a type of machine learning model that is made up of two neural networks: a generator network and a discriminator network. The generator network is trained..." />
+
+    <title>GANs and CycleGANs &#8212; Argus</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/rtd-data.js"></script>
+    <script src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluation" href="evaluation.html" />
+    <link rel="prev" title="Sim-to-Real Gap" href="sim2real.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+     
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../reference/blog/atom.xml"
+  title="Blog"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Argus</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Why Argus
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/problem.html">
+   Adverse-Weather impact on ADAS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/research.html">
+   Previous Research
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dimensionality.html">
+   Dimensionality explosion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sim2real.html">
+   Sim-to-Real Gap
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   GANs and CycleGANs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="evaluation.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Architecture
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arch/datasets.html">
+   Datasets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arch/stackable-pp.html">
+   Stackable Plug &amp; Play Generative Model Architecture
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arch/infra-devops-mlops.html">
+   Infrastructure Devops, &amp; MLOps
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arch/data-flywheel.html">
+   Data Flywheel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arch/future-work.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Use Cases
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/cases.html">
+   Use Cases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/client-facing.html">
+   Client-Facing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/internal-facing.html">
+   Internal-Facing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SaaS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/income-sources.html">
+   Income Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/costs.html">
+   Costs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/licensing-legal.html">
+   Licensing and Legal
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/javierdvo/Argus"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/issues/new?title=Issue%20on%20page%20%2Ftheory/gans.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/edit/master/docs/theory/gans.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/theory/gans.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage">
+   Usage
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-effective">
+   Cost-effective
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>GANs and CycleGANs</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage">
+   Usage
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-effective">
+   Cost-effective
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                 <section class="tex2jax_ignore mathjax_ignore" id="gans-and-cyclegans">
+<h1>GANs and CycleGANs<a class="headerlink" href="#gans-and-cyclegans" title="Permalink to this headline">#</a></h1>
+<p>Generative Adversarial Networks (GANs) are a type of machine learning model that is made up of two neural networks: a generator network and a discriminator network. The generator network is trained to generate new, synthetic data that is similar to a dataset that it has been trained on. The discriminator network is trained to determine whether a given sample is real or synthetic, based on the dataset it has been trained on.</p>
+<p>During training, the generator and discriminator networks are pitted against each other in a two-part “game.” The generator network tries to generate synthetic data that is similar enough to the real data that the discriminator network can’t tell the difference, while the discriminator network tries to correctly identify whether each sample is real or synthetic. As training progresses, both networks become better at their respective tasks, until the generator network is able to generate synthetic data that is virtually indistinguishable from the real data. This is represented in the following equation as a minimax game:</p>
+<div class="math notranslate nohighlight">
+\[\min_G \max_D \vec{E}_{x \sim P_\text{real}} \left [ \log D(x) \right ] + \vec{E}_{z \sim P_G} [\log ( 1- D(G(z)))]\]</div>
+<p>CycleGANs (short for Cycle-Consistent Generative Adversarial Networks) are a variant of GAN that are specifically designed to perform image-to-image translation tasks. In other words, CycleGANs are used to transform images from one domain into images in another domain while maintaining the same content and structure. An example of this would be transforming an image under clear weather conditions to one the same one as it would appear under  adverse weather conditions (yet maintaining the environment data)</p>
+<p>One of the key features of CycleGANs is their use of cycle consistency loss, which helps to ensure that the generated images are not only visually similar to the target domain, but also preserve the content and structure of the original images. This is achieved by training the CycleGAN to translate images back and forth between the two domains and using a loss function that measures the difference between the original image and the translated image.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">#</a></h2>
+<p>Within Argus, GANs are used in the generation phase of the model evaluation pipeline. Multiple GAN models are trained by the Argus team, and are then used in the dataset augmentation process to generate the adverse weather data for model evaluation. These models are constantly updated based on new data and then evaluated to always provide the best possible results that correctly match. You can select multiple models according to your needs, thereby augmenting your dataset to be augmented with hard-to-obtain adverse weather images and enabling a more robust model validation at a scale.</p>
+<p>One of the key benefits of GANs and CycleGANs is that they help tackle the Sim-to-Real gap innately thanks to is discriminator/generator architecture. A GAN with a robust dataset that adequately converges will by definition maximize the closeness of simulated images to real-world images, thus reducing the gap and ensuring the models are validated with real-like data(or the synthetic images can be used for training and thus the model is trained to match real-like probability distributions).</p>
+</section>
+<section id="cost-effective">
+<h2>Cost-effective<a class="headerlink" href="#cost-effective" title="Permalink to this headline">#</a></h2>
+<p>GAN’s that have adequately learned the domain mapping from a “clean” image to a adverse weather one (whichever effect it is), have the benefit of being more efficient and cost-effective than phenomenological simulation, given that the underlying probabilistic model that has been trained is sufficiently representative of the actual changes due to the physical phenomena.</p>
+<p>Effectively, the GAN model can bypass the compute-intensive calculation by “learning” an efficient (i.e. densely encoded) mapping of the domain shift in its training step, which can then be easily ran in a new image or scenario at a low computational cost. The phenomenological model necessarily needs to run compute-intensive tasks for each single frame every time it is run. When the number of frames / recordings needed lies in the millions, it might make more economical sense to use the pre-trained GAN.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./theory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="sim2real.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Sim-to-Real Gap</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="evaluation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Javier De Velasco Oriol<br/>
+  
+      &copy; Copyright 2022, Javier De Velasco Oriol.<br/>
+    Last updated on Dec 18, 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

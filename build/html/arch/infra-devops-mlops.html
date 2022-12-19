@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="Infrastructure Devops, & MLOps" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="arch/infra-devops-mlops.html" />
+<meta property="og:site_name" content="Argus" />
+<meta property="og:description" content="Challenges and risks: The main challenges and risks that the Argus system has: Safety: The safety of ADAS systems is paramount, and as such every decision taken with the system must begin by being ..." />
+<meta name="description" content="Challenges and risks: The main challenges and risks that the Argus system has: Safety: The safety of ADAS systems is paramount, and as such every decision taken with the system must begin by being ..." />
+
+    <title>Infrastructure Devops, &amp; MLOps &#8212; Argus</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/rtd-data.js"></script>
+    <script src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Flywheel" href="data-flywheel.html" />
+    <link rel="prev" title="Stackable Plug &amp; Play Generative Model Architecture" href="stackable-pp.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+     
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../reference/blog/atom.xml"
+  title="Blog"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Argus</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Why Argus
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/problem.html">
+   Adverse-Weather impact on ADAS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/research.html">
+   Previous Research
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/dimensionality.html">
+   Dimensionality explosion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/sim2real.html">
+   Sim-to-Real Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/gans.html">
+   GANs and CycleGANs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/evaluation.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Architecture
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="datasets.html">
+   Datasets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stackable-pp.html">
+   Stackable Plug &amp; Play Generative Model Architecture
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Infrastructure Devops, &amp; MLOps
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-flywheel.html">
+   Data Flywheel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="future-work.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Use Cases
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/cases.html">
+   Use Cases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/client-facing.html">
+   Client-Facing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/internal-facing.html">
+   Internal-Facing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SaaS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/income-sources.html">
+   Income Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/costs.html">
+   Costs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/licensing-legal.html">
+   Licensing and Legal
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/javierdvo/Argus"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/issues/new?title=Issue%20on%20page%20%2Farch/infra-devops-mlops.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/edit/master/docs/arch/infra-devops-mlops.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/arch/infra-devops-mlops.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenges-and-risks">
+   Challenges and risks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infrastructure-devops">
+   Infrastructure &amp; Devops
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mlops">
+   MLOps
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloud-vs-self-hosted-infrastructure-tradeoffs">
+   Cloud vs Self-Hosted Infrastructure Tradeoffs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mlops-as-a-service-vs-self-hosted-mlops">
+   MLOps-as-a-Service vs Self-Hosted MLOps
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Infrastructure Devops, & MLOps</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenges-and-risks">
+   Challenges and risks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infrastructure-devops">
+   Infrastructure &amp; Devops
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mlops">
+   MLOps
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloud-vs-self-hosted-infrastructure-tradeoffs">
+   Cloud vs Self-Hosted Infrastructure Tradeoffs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mlops-as-a-service-vs-self-hosted-mlops">
+   MLOps-as-a-Service vs Self-Hosted MLOps
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                 <section class="tex2jax_ignore mathjax_ignore" id="infrastructure-devops-mlops">
+<h1>Infrastructure Devops, &amp; MLOps<a class="headerlink" href="#infrastructure-devops-mlops" title="Permalink to this headline">#</a></h1>
+<section id="challenges-and-risks">
+<h2>Challenges and risks<a class="headerlink" href="#challenges-and-risks" title="Permalink to this headline">#</a></h2>
+<p>The main challenges and risks that the Argus system has:</p>
+<ul class="simple">
+<li><p>Safety: The safety of ADAS systems is paramount, and as such every decision taken with the system must begin by being thoroughly analyzed and its implications must be assumed to be robust and accurate enough as there is potential of risking human lives in the case of a failure.</p></li>
+<li><p>Proper Dataset Selection: The generative models are only as good as the source dataset that is being used to train them. For this reason the dataset needs to be constantly improved, analyzed and validated. Diverse adverse weather conditions need to be obtained, and this can be complex due to the legal, technical and climate conditions. The dataset acquisition can be tackled as described in the datasets and data-flywheel sections.</p></li>
+<li><p>Model Creep / Combinatorics / Complexity: by mix-and-matching multiple adverse condition generative models the system runs the risk of increasing the complexity of the system and the number of models that need to be trained and maintained. This is even more relevant when it is considered that the outputs of the models then need to be evaluated with multiple downstream task models. A balance must be struck to ensure optimal performance at a functional scale.</p></li>
+<li><p>Scalable architecture: The architecture must be able to grow and scale successfully to truly accomplish the task Argus aims to fulfill. A dependable testing/ validation system needs to be highly reliable to successfully empower the reality of Autonomous Driving in a safe manner.</p></li>
+<li><p>Model architecture Lock-in: Care must be taken to explore other architectures for generative models, as its possible that the proposed solution is not the ideal one, and a desire to see it work out must not prevent from analyzing it logically.</p></li>
+<li><p>Diminishing returns: Its possible that at some point the training of generative models will not be able to improve the performance of the system, and the effort to train them will not be worth the gains. This is a risk that needs to be mitigated by constantly evaluating the performance of the generative models and the downstream task, and compare them with the running costs and improvements seen.</p></li>
+<li><p>Economics: The development must always take into consideration the economics of the system, as its a for-profit venture and as such needs to be financially viable for its continuous development. Far-fetched solutions risk being too expensive to implement and maintain, and as such must be avoided. Efficiency must be a priority.</p></li>
+</ul>
+</section>
+<section id="infrastructure-devops">
+<h2>Infrastructure &amp; Devops<a class="headerlink" href="#infrastructure-devops" title="Permalink to this headline">#</a></h2>
+<p>The Argus system needs to be deployed and available for multiple clients as a SaaS-based solution. This implies availability and highly responsive user experience for the different clients that can scale.</p>
+<p>A scalable infrastructure architecture can be implemented by using cluster-based Kubernetes. Dockerized environments can be used for internal development and releases at the prototyping phases. Prometheus can be useful to monitor containers and clusters to identify bottlenecks and errors. A Load Balancer such as ELB, ALB, CLB or Nginx can be used to balance the load between multiple clusters efficiently if the client load is high enough. This system can be deployed on a cloud-based infrastructure, such as AWS, GCP, or Azure, to ensure scalability and availability or alternatively on a self-hosted infrastructure, such as multiple on-premises servers, to ensure security and privacy. Each of these has particular tradeoffs that are explored further on.</p>
+<p>In terms of development of the codebase, Github/ Gitlab have been consistency used for version control and collaboration, and most developers are familiar with these tools minimizing the need for trainings. Jenkins can be used for Continuous Integration and Continuous Development. Unit testing and test automation can also be implemented to ensure errors are quickly identified.</p>
+</section>
+<section id="mlops">
+<h2>MLOps<a class="headerlink" href="#mlops" title="Permalink to this headline">#</a></h2>
+<p>Additionally, as Argus is a ML-focused solution, MLOps is a highly crucial area that can potentially make or break the system. A proper MLOps pipeline can greatly reduced the effort in, enabling the developers to focus on creative generative model design, and insight validation/ evaluation rather than the nitty-gritty ops work. Handling the training, validation, testing, logging, release and analysis in the background is highly desirable. The main areas where MLOps can empower the Argus system are:</p>
+<ul class="simple">
+<li><p>Distributed Computing</p></li>
+<li><p>Experiment Tracking / Logging</p></li>
+<li><p>Model Registry</p></li>
+<li><p>Model Deployment</p></li>
+<li><p>Metadata Storage</p></li>
+<li><p>Visualization</p></li>
+</ul>
+<p>Apache Spark, Hadoop or dCUDA can be used to distribute computation-intensive tasks across multiple instances. Tensorflow, Pytorch and Elephas (by leveraging Spark) can also be used to distribute the ML training phases into multiple devices if required. This is particularly crucial if the generative models need to be trained on a large ADAS dataset to ensure the performance of such models is highly powerful. Additionally, retraining the evaluation models can also be particularly expensive (multiple models)</p>
+<p>Training the generative and evaluation models is a complex task that is best developed in tandem with an Experiment Tracking tool that allows orchestration of ML model experimentation and logs it for further processing. Some possible tools for achieving this are Neptune, Tensorboard, Weights and Biases, ClearML, MLFlow, Comet, and Polyaxon.</p>
+<p>Metadata tracking is quite useful as it allows the system to group frames based on specific data which might be useful for further validation. For example a recurrent set of difficult to simulate frames can be grouped together and used to focus the development performance of subsequent generative models. This can be done by using a metadata storage system such as MLFlow, Neptune, or Vertex.</p>
+<p>Visualization of the training and testing results is highly useful for continuous development and improvement of the model by visually showcasing the historic and current performance of models at a simple glance, and by allowing the user to quickly identify frames that might be problematic. This can be done by using a visualization tool such as Tensorboard, MLFlow, or Neptune.</p>
+<p>By leveraging multiple technologies, development of the Argus system can be greatly empowered and the development time invested in routine areas can be reduced significantly. This is particularly useful as it allows developers to fully focus on the generative models as they are the most complex and time-consuming part of the system, allowing a constant stream of updates and better generative models.</p>
+<p>A sample architectural diagram of the infrastructure solution is shown below:</p>
+<a class="reference internal image-reference" href="../_images/sample_arch.png"><img alt="../_images/sample_arch.png" src="../_images/sample_arch.png" style="width: 1080px;" /></a>
+</section>
+<section id="cloud-vs-self-hosted-infrastructure-tradeoffs">
+<h2>Cloud vs Self-Hosted Infrastructure Tradeoffs<a class="headerlink" href="#cloud-vs-self-hosted-infrastructure-tradeoffs" title="Permalink to this headline">#</a></h2>
+<p>Implementation of Self-Hosted infrastructure is a viable option, but it requires a lot of time and effort to maintain and scale. It is also more expensive than using a cloud provider due to volume efficiencies. The advantage is that it gives total control over the hardware and software, and as such can be more flexible if needed. Additionally, it is more secure than cloud providers, as it is not exposed to the internet and can be isolated from the rest of the network. Furthermore, financially, it can be cost-effective in the long run, as the hardware investment cost can be recovered over time.</p>
+<p>The use of S3 or similar storage systems allows offloading the data handling to a scalable on-demand solution that can potentially scale as much as it needs to. Datalake structures can be used to allow multiple sources of information to be used for different models or components within the company. If the training is done with on-premise devices, then downloading the datasets can have a high data transfer and as such would be much more expensive, in this scenario with local training a high-speed SSD / NVME is ideal to ensure the R/W is not the bottleneck of the system. Dataset regulations might make Self-Hosted necessary, if the law identifies that particular datasets that are sensitive cannot leave the country.</p>
+<p>Cloud-based providers in contrast have very strict SLAs and uptime requirements. They are also easier to maintain and do not require a dedicated crew to maintain the infrastructure. They are also more flexible, as they can be scaled up and down as needed based on demand. Additionally, support is readily available and the risk of downtime is mitigated.</p>
+<p>GPU-based training on cloud can be be expensive, but requires a much smaller upfront investment as the cost is amortized over a larger number of users, and can be scaled much more easily than setting up a new GPU cluster. The cost of training on cloud is also lower than on-premise particularly when the electricity costs are high, and the maintenance costs also tends to be much lower.</p>
+</section>
+<section id="mlops-as-a-service-vs-self-hosted-mlops">
+<h2>MLOps-as-a-Service vs Self-Hosted MLOps<a class="headerlink" href="#mlops-as-a-service-vs-self-hosted-mlops" title="Permalink to this headline">#</a></h2>
+<p>The main downside of MLOps-as-a-service tends to be the cost associated to it, particularly when it scales based on the number of requests / runs that are necessary. As the number of models grows and their combinations the cost will then tend to increase. The internal development of MLOps can also be achieved with effort from the internal team, although this has the downside that time and effort must be dedicated to it, when it can be better spent working on the generative models which are the main competitive advantage. A MLOps system that is both nimble and flexible, and can be adapted to the needs of the development team is ideal for bootstrapping the Argus system in its early stages. Upon further success it can be reevaluated if migrating to a proprietary pipeline is better. A complex pipeline also adds complexity to the system so a single provider could be used at a early stage to minimize the risk of complexity.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./arch"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="stackable-pp.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Stackable Plug &amp; Play Generative Model Architecture</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="data-flywheel.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Flywheel</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Javier De Velasco Oriol<br/>
+  
+      &copy; Copyright 2022, Javier De Velasco Oriol.<br/>
+    Last updated on Dec 18, 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

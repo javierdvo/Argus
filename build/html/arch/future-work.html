@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="Future Work" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="arch/future-work.html" />
+<meta property="og:site_name" content="Argus" />
+<meta property="og:description" content="The scope of this solution is currently limited due to the timeframe for development. Further proposed improvements to the Argus product are as follows: Thorough Research: A much more thorough lite..." />
+<meta name="description" content="The scope of this solution is currently limited due to the timeframe for development. Further proposed improvements to the Argus product are as follows: Thorough Research: A much more thorough lite..." />
+
+    <title>Future Work &#8212; Argus</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/rtd-data.js"></script>
+    <script src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Use Cases" href="../uses/cases.html" />
+    <link rel="prev" title="Data Flywheel" href="data-flywheel.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+     
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../reference/blog/atom.xml"
+  title="Blog"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Argus</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Why Argus
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/problem.html">
+   Adverse-Weather impact on ADAS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/research.html">
+   Previous Research
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/dimensionality.html">
+   Dimensionality explosion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/sim2real.html">
+   Sim-to-Real Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/gans.html">
+   GANs and CycleGANs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../theory/evaluation.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Architecture
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="datasets.html">
+   Datasets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stackable-pp.html">
+   Stackable Plug &amp; Play Generative Model Architecture
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="infra-devops-mlops.html">
+   Infrastructure Devops, &amp; MLOps
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-flywheel.html">
+   Data Flywheel
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Use Cases
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/cases.html">
+   Use Cases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/client-facing.html">
+   Client-Facing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../uses/internal-facing.html">
+   Internal-Facing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SaaS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/income-sources.html">
+   Income Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/costs.html">
+   Costs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../saas/licensing-legal.html">
+   Licensing and Legal
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/javierdvo/Argus"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/issues/new?title=Issue%20on%20page%20%2Farch/future-work.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/javierdvo/Argus/edit/master/docs/arch/future-work.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/arch/future-work.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thorough-research">
+   Thorough Research
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#robust-and-comprehensive-delimitation">
+   Robust and comprehensive delimitation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation-extension">
+   Evaluation extension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#better-documentation-and-citations">
+   Better documentation and citations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-implementation">
+   Code Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-collection">
+   Dataset collection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multimodal-sensors">
+   Multimodal Sensors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ci-cd">
+   CI &amp; CD
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scalable-infrastructure">
+   Scalable infrastructure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparison-vs-phenomenological-simulation">
+   Comparison vs Phenomenological Simulation
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Future Work</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thorough-research">
+   Thorough Research
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#robust-and-comprehensive-delimitation">
+   Robust and comprehensive delimitation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation-extension">
+   Evaluation extension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#better-documentation-and-citations">
+   Better documentation and citations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-implementation">
+   Code Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-collection">
+   Dataset collection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multimodal-sensors">
+   Multimodal Sensors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ci-cd">
+   CI &amp; CD
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scalable-infrastructure">
+   Scalable infrastructure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparison-vs-phenomenological-simulation">
+   Comparison vs Phenomenological Simulation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                 <section class="tex2jax_ignore mathjax_ignore" id="future-work">
+<h1>Future Work<a class="headerlink" href="#future-work" title="Permalink to this headline">#</a></h1>
+<p>The scope of this solution is currently limited due to the timeframe for development. Further proposed improvements to the Argus product are as follows:</p>
+<section id="thorough-research">
+<h2>Thorough Research<a class="headerlink" href="#thorough-research" title="Permalink to this headline">#</a></h2>
+<p>A much more thorough literature research should be made to fully understand the aggregate conclusions in this field from academia and validate other alternatives and viable solutions. Multiple references should be analyzed and evaluated for the different pieces of the solution before a more definite implementation.</p>
+</section>
+<section id="robust-and-comprehensive-delimitation">
+<h2>Robust and comprehensive delimitation<a class="headerlink" href="#robust-and-comprehensive-delimitation" title="Permalink to this headline">#</a></h2>
+<p>A more in depth delimitation of the solution is preferred. There are certainly many gaps that I haven’t seen or thought about, or areas where my proposed solutions are lackluster, inexperienced or inefficient. A more thorough approach to this would require much more thorough discussions with multiple PMs, developers and researchers to ensure this is reviewed by multiple sets of eyes and a good solution can be iteratively achieved.</p>
+</section>
+<section id="evaluation-extension">
+<h2>Evaluation extension<a class="headerlink" href="#evaluation-extension" title="Permalink to this headline">#</a></h2>
+<p>Multiple evaluation metrics can be extended in the generative model evaluation to provide a more robust and certain evaluation of the validness of the different models.</p>
+</section>
+<section id="better-documentation-and-citations">
+<h2>Better documentation and citations<a class="headerlink" href="#better-documentation-and-citations" title="Permalink to this headline">#</a></h2>
+<p>Documentation should be extended with better descriptions, explanations, mathematical Latex equations, and multiple cites from the academic sources used in the system to ground the decisions being made and methods being used.</p>
+</section>
+<section id="code-implementation">
+<h2>Code Implementation<a class="headerlink" href="#code-implementation" title="Permalink to this headline">#</a></h2>
+<p>The description of Argus should be implemented in a Proof-of-Concept working demo to prove that it works and start iterating based on actual use of the system. The implementation should follow the description in the architecture to make it robust and scalable from its onset, although a limited PoC can also be executed.</p>
+</section>
+<section id="dataset-collection">
+<h2>Dataset collection<a class="headerlink" href="#dataset-collection" title="Permalink to this headline">#</a></h2>
+<p>Multiple OS datasets should be implemented to validate the potential of this idea and prove that the system works correctly.</p>
+</section>
+<section id="multimodal-sensors">
+<h2>Multimodal Sensors<a class="headerlink" href="#multimodal-sensors" title="Permalink to this headline">#</a></h2>
+<p>The current version of Argus is limited to evaluating camera-based models that use images as their input information. Argus can be extended to use additional modes of information that are commonly used in ADAS systems. Different weather effects impact each of these sensors differently, so there are some that make sense to validate and others that won’t for each sensor. For the adverse weather effects that do occur, the complexity of implementing this lies in obtaining the adequate datasets (with most being proprietary) that contain both clear weather and adverse weather sensor data that can then enable learning the domain mapping function of each.</p>
+</section>
+<section id="ci-cd">
+<h2>CI &amp; CD<a class="headerlink" href="#ci-cd" title="Permalink to this headline">#</a></h2>
+<p>Continuous Integration (CI) and Continuous Delivery (CD) via Jenkins or similar should also be implemented to ensure a smooth and flawless experience from the client’s and ensure that the system is reliable, scalable and maintainable over time with faster development cycles. JIRA tracking and Github / Gitlab integrations should be implemented to</p>
+</section>
+<section id="scalable-infrastructure">
+<h2>Scalable infrastructure<a class="headerlink" href="#scalable-infrastructure" title="Permalink to this headline">#</a></h2>
+<p>The current infrastructure of Argus is limited in its throughput capacity. A production-ready version should be implemented in scalable infrastructure that can easily add extra capacity based on demand and reduce it when unnecessary, to ensure optimal cost that fulfills all the system’s needs. Load-balancing, resource allocation balance, and cluster-based computing instances can be possible solutions to help the system scale better based on client demand. The computing cost can also be automated by using Apache Spark, Hadoop, Flink, Dask, dCUDA, etc. Furthermore, code efficiency optimization would also be crucial to ensure the maximum possible efficiency.</p>
+</section>
+<section id="comparison-vs-phenomenological-simulation">
+<h2>Comparison vs Phenomenological Simulation<a class="headerlink" href="#comparison-vs-phenomenological-simulation" title="Permalink to this headline">#</a></h2>
+<p>Further research needs to be invested in comparing the GAN-based weather simulation with the phenomenological simulation to truly evaluate if the GAN-based approach is adequately good at mapping and in an end-to-end solution to truly be similar in performance to a physics-based simulation, to ensure that there is actual empirical merit to using it as a better alternative.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./arch"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="data-flywheel.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Data Flywheel</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../uses/cases.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Use Cases</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Javier De Velasco Oriol<br/>
+  
+      &copy; Copyright 2022, Javier De Velasco Oriol.<br/>
+    Last updated on Dec 18, 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
